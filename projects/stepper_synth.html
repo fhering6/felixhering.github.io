@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stepper Synth | Felix Hering</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Felix Hering</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-content">
+        <article>
+            <div class="project-header">
+                <h1>Stepper Synth</h1> 
+                <p class="project-meta">Fall 2023</p>
+                <div class="project-tags">
+                    <span class="tech-pill">Embedded Systems</span>
+                    <span class="tech-pill">PCB Design (KiCad)</span>
+                    <span class="tech-pill">Computer Vision</span>
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">STM32</span>
+                    <span class="tech-pill">Control Systems</span>
+                </div>
+            </div>
+
+            <div class="project-content">
+                <h2>Project Overview</h2>
+                <p>A novel musical instrument that generates piano tones using stepper motors as frequency oscillators, controlled by computer vision.</p>
+                
+                <h2>System Architecture</h2>
+                <p>The system operates as a complete pipeline, from visual input to audio output. The webcam feeds a video stream to a host PC, where a Python/OpenCV script performs contour detection to identify finger presses on a printed keyboard. This script maps the detected presses to musical notes.</p>
+                
+                <p>The note data is then serialized and sent via UART to an STM32 microcontroller. The STM32 is responsible for all real-time control, generating the precise PWM frequencies required to drive the A4988 drivers. These drivers, in turn, spin the NEMA17 stepper motors at the exact rotational velocities needed to produce audible tones corresponding to the notes played.</p>
+                
+                <figure>
+                    <img src="../pictures/stepper_synth/system_snapshot.png" alt="Stepper Synth System Snapshot" style="width:100%; max-width: 600px;">
+                    <figcaption>High-Level System Architecture</figcaption>
+                </figure>
+
+                
+                <h2>Hardware & Custom PCB Design</h2>
+                <p>To move beyond an unreliable prototype, a custom 2-layer PCB was designed in KiCad. This board robustly houses all power and control electronics, handling the 12V / 8A supply required for the motors.</p>
+
+                <h3>Board Features:</h3>
+                <ul>
+                    <li>Integrates four A4988 stepper motor drivers.</li>
+                    <li>Manages high-current (12V @ 8A) power distribution.</li>
+                    <li>Includes onboard user controls:
+                        <ul>
+                            <li>Push-button to toggle motor power (Active).</li>
+                            <li>Push-button to toggle Arpeggiator (ARP) mode.</li>
+                            <li>Potentiometer to control Arpeggiator frequency.</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <figure>
+                    <img src="../pictures/stepper_synth/schematic.png" alt="KiCad Schematic for Stepper Synth">
+                    <figcaption>PCB Schematic (KiCad)</figcaption>
+                </figure>     
+                
+                <div class="project-side-by-side">
+                    
+                    <div class="text">
+                        <h2>Challenges & Key Lessons</h2>
+                        <p>This project was a significant step up from breadboard-level electronics and provided several critical lessons in power electronics and system integration.</p>
+                        
+                        <h3>From Breadboard to PCB</h3>
+                        <p>The initial prototype was built on a solderless breadboard. This was a major failure point, as the traces are not rated for the 8A required by the motors. This led to overheating, unreliability, and an inability to power more than one motor simultaneously. Designing a custom PCB was not just an upgrade, but a requirement.</p>
+
+                        <h3>The Importance of Capacitance</h3>
+                        <p>The first board iteration lacked proper bulk and decoupling capacitors. This caused severe voltage drops and logic-level noise when the motors drew large inductive currents, preventing the system from functioning. The redesign forced a deep dive into sizing bulk capacitance for a high-current load (12V/8A), understanding capacitor ESR, and the critical role of small decoupling capacitors for the logic components.</p>
+                        
+                        <h3>Understanding Current Flow</h3>
+                        <p>This project was the first time I had to move beyond the concept of "ground is 0V." I learned to design for high-current return paths, use copper zones (ground planes) to manage current and noise, and properly size trace widths and vias for power delivery—concepts that are invisible until you work with real-world power demands.</p>
+                    </div>
+                    
+                    <figure>
+                        <img src="../pictures/stepper_synth/layout.png" alt="KiCad PCB Layout for Stepper Synth">
+                        <figcaption>Final 2-Layer PCB Layout (KiCad)</figcaption>
+                    </figure>
+                
+                </div>
+
+                <h2>Computer Vision & Detection Logic</h2>
+                    <p>The "eyes" of the synth are a Python script using OpenCV, which runs on a host computer. This script is responsible for watching the printed keyboard, identifying key presses, and sending the corresponding note data to the STM32 microcontroller via UART.</p>
+                    <p>The script operates in two distinct phases: a one-time "Setup Mode" and a continuous "Play Mode".</p>
+
+                    <h3>Phase 1: Setup & Key Calibration</h3>
+                    <p>Before any notes can be played, the script must learn where the piano keys are. The setup mode handles this:</p>
+                    <ul>
+                        <li><strong>Camera Setup:</strong> The script initializes the webcam feed and flips the image 180 degrees (`cv2.flip`) to correct for the overhead camera's orientation.</li>
+                        <li><strong>Dynamic Thresholding:</strong> The user is shown a live feed with on-screen controls. They can adjust the HSV (Hue, Saturation, Value) color thresholds in real-time to isolate the white keys and black keys perfectly, as well as the skin-tone range for their fingers. This adapts the program to any lighting condition.</li>
+                        <li><strong>Key Mapping:</strong> Once the thresholds are set, the script finds all key contours (`cv2.findContours`), filters them by area, and sorts them by their X-coordinate. It then assigns a musical note (e.g., "C5", "D#5") to each key, creating a map of all key locations.</li>
+                        <li><strong>Locking:</strong> When the user presses 'x', this `fixed_note_map` is saved, and the script moves to the next phase.</li>
+                    </ul>
+
+                    <h3>Phase 2: Real-Time Finger Tracking & Collision</h3>
+                    <p>With the keys locked in, the script enters its main loop to detect playing:</p>
+                    <ul>
+                        <li><strong>Skin Detection:</strong> The script continuously applies the saved skin-tone color mask to the live video, finding all contours that match the user's fingers.</li>
+                        <li><strong>Fingertip Tracking:</strong> For each finger contour, a simple but effective algorithm finds the "fingertip" by identifying the topmost point of the contour (the point with the minimum Y-value).</li>
+                        <li><strong>Collision Detection:</strong> The script then iterates through all detected fingertips and checks if their (x, y) coordinates fall inside the saved bounding box of any piano key.</li>
+                        <li><strong>Data Transmission:</strong> All notes that are "active" (being touched by a fingertip) are added to a set. This set of notes is then serialized and sent to the STM32, which takes over to produce the sound.</li>
+                    </ul>
+                    
+                    <h3>Key Code Snippets</h3>
+                    <p>Two of the most important parts of the algorithm were finding the fingertip and checking for the "press".</p>
+                    
+                    <p><strong>1. Finding the Fingertip:</strong></p>
+                    <pre><code># Find the topmost point (minimum y-value)
+                    # This serves as the fingertip coordinate.
+                    topmost = tuple(cnt[cnt[:, :, 1].argmin()][0])
+                    </code></pre>
+
+                        <p><strong>2. Collision Detection:</strong></p>
+                        <pre><code># Check if the fingertip (fx, fy) is inside the key's bounding box
+                    for (kx, ky, kw, kh), note in fixed_note_map.items():
+                        if kx <= fx <= kx + kw and ky <= fy <= ky + kh:
+                            active_notes.add(note)
+                    </code></pre>
+
+                <h2>Real-Time Control (STM32 Firmware)</h2>
+                    <p>The "brains" of the synth is an STM32 microcontroller running C code, which is responsible for all real-time audio generation and hardware control. The entire program is interrupt-driven and performs four main tasks:</p>
+                    
+                    <ul>
+                        <li><strong>Note-to-Frequency Generation:</strong> Translates musical notes into precise hardware timer frequencies.</li>
+                        <li><strong>UART Command Parsing:</strong> Receives and interprets commands from the Python script.</li>
+                        <li><strong>Polyphony & State Management:</strong> Manages which of the 3 motors is playing which note, allowing for 3-note polyphony.</li>
+                        <li><strong>Hardware I/O:</strong> Handles button presses (Octave, Arp) and controls the status LEDs.</li>
+                    </ul>
+
+                    <h3>1. PWM Frequency Generation</h3>
+                    <p>The core of the "synth" is using hardware timers in PWM mode. The frequency of the PWM signal directly corresponds to the audible note. This is achieved using pre-calculated timer values:</p>
+                    <ul>
+                        <li>Four `const` arrays (e.g., `notes0`, `notes1`...) are stored in firmware, acting as lookup tables.</li>
+                        <li>Each table maps a note (like "C#") to the exact Auto-Reload Register (ARR) value needed for a timer to output that note's frequency.</li>
+                        <li>The `playNote` function looks up this `arr` value, sets the Compare Register (CCR) to `arr / 2` (to create a 50% duty cycle square wave), and starts the timer.</li>
+                    </ul>
+
+                    <h4>How the Frequency is Calculated</h4>
+                        <p>The final audible frequency is a direct result of the microcontroller's 80 MHz system clock, the timer's <b>Prescaler (PSC)</b>, and the note's <b>Auto-Reload Register (ARR)</b> value. The core formulas are:</p>
+                        
+                        <div style="text-align:center; font-weight: bold; font-family: 'Courier New', Courier, monospace; font-size: 1.2rem; margin: 1rem 0;">
+                            f<sub>COUNT</sub> = f<sub>SYSCLK</sub> / (PSC + 1)
+                            <br>
+                            f<sub>PWM</sub> = f<sub>COUNT</sub> / (ARR + 1)
+                        </div>
+
+                        <p>With the 80 MHz clock and the prescaler set to 9, the timer's counter increments at a fixed rate:</p>
+                        
+                        <p style="text-align:center; font-weight: bold; font-family: 'Courier New', Courier, monospace; font-size: 1.2rem; margin: 1rem 0;">
+                            f<sub>COUNT</sub> = 80,000,000 Hz / (9 + 1) = 8,000,000 Hz (or 8 MHz)
+                        </p>
+
+                        <p>Therefore, the final output frequency for any note is simply:</p>
+                        
+                        <p style="text-align:center; font-weight: bold; font-family: 'Courier New', Courier, monospace; font-size: 1.2rem; margin: 1rem 0;">
+                            f<sub>PWM</sub> = 8,000,000 / (ARR + 1)
+                        </p>
+
+                        <p><b>Example (Playing note 'A'):</b><br>
+                        The lookup table defines 'A' as ARR = 2272.<br>
+                        f<sub>PWM</sub> = 8,000,000 / (2272 + 1) = 3519.5 Hz, which is the precise frequency for the A7 musical note.
+                        </p>
+
+                    <pre><code>// Inside playNote() function:
+        // 1. Get the pre-calculated timer period for this note
+        int arr = currentNotes[noteIndex].arr;
+        int ccr = arr / 2; // 50% duty cycle
+
+        // 2. Load values into the motor's specific timer
+        __HAL_TIM_SET_AUTORELOAD(TIMER1_HANDLE, arr);
+        __HAL_TIM_SET_COMPARE(TIMER1_HANDLE, TIMER1_CHANNEL, ccr);
+
+        // 3. Start the PWM signal
+        HAL_TIM_PWM_Start(TIMER1_HANDLE, TIMER1_CHANNEL);
+                    </code></pre>
+
+                    <h3>2. UART Command Parser</h3>
+                    <p>The STM32 receives commands from the Python script over UART. An interrupt (`HAL_UART_RxCpltCallback`) fires for every single byte received, which builds a command string. When a newline character is detected, the string is parsed to find the note and the command ("ON" or "OFF").</p>
+                    
+                    <pre><code>// Inside HAL_UART_RxCpltCallback() after a full line is received:
+        // 1. Tokenize the command string (e.g., "C# ON")
+        char *cmd = strtok((char*)rxBuffer, " "); // "C#"
+        char *arg = strtok(NULL, " \r\n");     // "ON"
+
+        // 2. Find the note's index from the lookup table
+        for (int i = 0; i < NUM_NOTES; i++) {
+            if (strcmp(cmd, currentNotes[i].name) == 0) { 
+                noteIndex = i; 
+                break; 
+            }
+        }
+
+        // 3. Call the correct hardware function
+        if (noteIndex >= 0) {
+            if (strcmp(arg, "ON")  == 0) playNote(noteIndex);
+            if (strcmp(arg, "OFF") == 0) stopNote(noteIndex);
+        }
+                    </code></pre>
+
+                    <h3>3. Arpeggiator & Hardware Interrupts</h3>
+                    <p>Physical buttons for "Octave Select" and "Arpeggiator" are handled by GPIO interrupts (`HAL_GPIO_EXTI_Callback`). The arpeggiator itself is driven by a separate timer (TIM2) acting as a metronome. When this timer's interrupt fires, it plays the next note in the arpeggiator sequence.</p>
+
+                    <pre><code>// The Arpeggiator's "metronome" interrupt
+        void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+            // Check if it's the ARP timer, mode is on, and notes are held
+            if (htim->Instance == TIM2 && arpMode && arpCount > 0) {
+                
+                // Stop the last note
+                stopNote(arpNotes[arpIndex]);
+                
+                // Move to the next note in the list
+                arpIndex = (arpIndex + 1) % arpCount;
+                
+                // Play the new note
+                playNote(arpNotes[arpIndex]);
+            }
+        }
+                    </code></pre>
+
+                <h2>StepperSynth in Action:</h2>
+                <figure>
+                    <video style="width:100%; max-width: 800px; display: block; margin: 1rem auto; border-radius: 8px;" controls>
+                        <source src="../pictures/stepper_synth/demo.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Demo video for 1st prototype</figcaption>
+                </figure>
+
+                <div class="project-links">
+                    <a href="#" class="button">View GitHub Repository</a>
+                    <a href="#" class="button">Watch Demo Video</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Felix Hering</p>
+    </footer>
+</body>
+</html>

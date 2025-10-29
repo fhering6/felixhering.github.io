@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME 2110 | Felix Hering</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Felix Hering</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-content">
+        <article>
+            <div class="project-header">
+                <h1>Water-Energy Lab Research</h1>
+                <p class="project-meta">Summer 2024 | ME 2110</p>
+                <div class="project-tags">
+                    <span class="tech-pill">Solidworks</span>
+                    <span class="tech-pill">LabView</span>
+                    <span class="tech-pill">Heat Transfer</span>
+                    <span class="tech-pill">Fluid Mechanics</span>
+                    <span class="tech-pill">Experimental Design</span>
+
+                </div>
+            </div>
+
+            <div class="project-side-by-side">
+                <div class="text">
+                    <h2>Air Gap Membrane Distillation (AGMD) Research</h2>
+                    <ul>
+                        <li>Developed and tested a lab-scale AGMD prototype for saline water desalination.</li>
+                        <li>AGMD uses a hydrophobic membrane and a static air gap to drive vapor transport from heated saline to a condensation surface.</li>
+                        <li>The system relies on thermal gradients and vapor pressure differences, avoiding direct contact between liquid phases to reduce fouling and maintenance.</li>
+                        <li>Designed a 3D-printed test fixture with a 45° angled condensation plate, improving condensate drainage and heat transfer.</li>
+                        <li>Explored AGMD as a low-energy, low-maintenance alternative for small-scale desalination applications.</li>
+                    </ul>
+                </div>
+                <img src="../pictures/agmd.png" alt="Air Gap Membrane Distillation">
+            </div>
+
+            <h2>Final Design</h2>
+                <h3>Condensation Plate</h3>
+                <ul>
+                    <li>Designed a condensation plate with ridge features to promote efficient condensation and collection of condensate.</li>
+                    <li>Ridges increased surface area, disrupted laminar film flow, and minimized channeling to maintain uniform condensate distribution.</li>
+                    
+                    <div class="project-media">
+                        <img src="../pictures/falling_film.png" alt="ME 2110 Robot" width="600">
+                        <figcaption>Condensation Plate</figcaption>
+                    </div>
+                </ul>
+
+                <h3>Full Setup</h3>
+                <ul>
+                    <li>Water vapor is generated below a hydrophobic membrane, which prevents liquid crossover and allows only vapor to pass.</li>
+                    <li>Salt precipitates on the heated top plate as water evaporates from the saline solution.</li>
+                    <li>The vapor condenses on the condensation plate plate, where it is collected as purified water.</li>
+
+                    <div class="project-media">
+                        <img src="../pictures/agmd_final.png" alt="ME 2110 Robot" width="600">
+                        <figcaption>Full AGMD Diagram</figcaption>
+                    </div>
+                 </ul>
+
+            <h2>Further Research</h2>
+
+            <h3>Durability Study of Polymer Substrates for Brine Concentration</h3>
+            <p>
+                One of the primary limitations of air gap membrane distillation (AGMD) is the buildup of salt precipitates, which can accumulate on the vapor membrane. This scaling reduces heat transfer efficiency and disrupts the critical temperature gradient that drives the process. As a result, AGMD systems often require frequent maintenance to remove salt deposits. The second phase of this study explored polymer materials that are less prone to salt scaling in order to reduce maintenance frequency and operational costs.
+            </p>
+            
+            <h3>Goal</h3>
+            <p>
+                Evaluate the precipitation behavior of saline solutions on various polymer surfaces. Polymers were selected due to their chemical resistance, low cost, and high thermal stability. A total of eight materials were tested: Acrylic, Polyethylene, PTFE, PEEK, PVDF, Polysulfone, Polycarbonate, and Aluminum (used as a baseline).
+            </p>
+            
+            <h3>Experimental Setup</h3>
+            <p>
+                The experiment replicated the salt scaling and cleaning processes encountered in AGMD systems. Key parameters such as contact angle and surface roughness were measured to assess the surface energy characteristics of each material, which influence salt adhesion behavior.
+            </p>
+            <ul>
+                <li>Recorded initial weight and dimensions of all samples</li>
+                <li>Measured contact angle using a goniometer</li>
+                <li>Assessed surface roughness using a profilometer</li>
+                <li>Exposed samples to a saturated NaCl solution at 80 °C for 6 hours, angled at 45° to simulate condensation conditions</li>
+                <li>Reweighed samples to quantify salt deposition</li>
+                <li>Descaled samples by soaking in deionized water with a stir bar (400 RPM) for 1 hour</li>
+                <li>Reweighed samples post-cleaning</li>
+                <li>Dried samples in a vacuum oven for 30 minutes</li>
+                <li>Performed final contact angle and surface roughness measurements</li>
+            </ul>
+
+            <div class="project-media">
+                <img src="../pictures/salt_scaling.png" alt="Salt Scaling Setup">
+                <figcaption>Salt Scaling Setup</figcaption>
+            </div>
+
+            <h3>Results and Conclusion</h3>
+
+            <p>
+                **Acrylic** showed the highest increase in mass after exposure to saline solutions, indicating the greatest salt deposition.
+            </p>
+            <ul>
+                <li>Its polar ester groups likely adsorbed water, promoting salt crystallization.</li>
+                <li>High surface charge density may have attracted more ions from the solution.</li>
+                <li>A porous surface structure could have increased available area for salt accumulation.</li>
+            </ul>
+            
+            <p>
+                **PTFE** and **Polyethylene** exhibited the smallest change in mass across all tests:
+            </p>
+            <ul>
+                <li>This aligns with expectations, as both have extremely low surface energies, which minimize salt adhesion.</li>
+            </ul>
+            
+            <p>
+                Post-experiment surface roughness also revealed that **Acrylic** and **Polyethylene** experienced the most noticeable increase in texture due to scaling. In contrast, **PTFE** and **Polycarbonate** showed minimal changes in surface roughness, suggesting better resistance to salt deposition and easier cleaning.
+            </p>
+            
+
+            <div class="project-media">
+                <img src="../pictures/acrylic.png" alt="Effect of salt scaling on Acrylic" width="600">
+                <figcaption>Effct of salt scaling on Acrylic</figcaption>
+            </div>
+
+                 
+
+                
+

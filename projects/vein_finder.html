@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Vein Finder | Felix Hering</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Felix Hering</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-content">
+        <article>
+            <div class="project-header">
+                <h1>Smart Vein Finder Imaging System</h1>
+                <p class="project-meta">Fall 2025 (Create X Startup Class)</p> 
+                <div class="project-tags">
+                    <span class="tech-pill">Med Tech</span>
+                    <span class="tech-pill">PCB Design (KiCad)</span>
+                    <span class="tech-pill">NVIDIA Jetson</span>
+                    <span class="tech-pill">Computer Vision</span>
+                    <span class="tech-pill">Embedded Systems</span>
+                    <span class="tech-pill">Hardware Sourcing</span>
+                </div>
+            </div>
+
+            <div class="project-content">
+                
+                <h2>Project Overview</h2>
+                <p>As part of Georgia Tech's Create X startup class, our team (two CS, one BME, and myself as hardware lead) is developing a low-cost, intelligent vein finder. Unlike existing devices that provide a simple 2D map, our solution uses multi-spectral imaging to estimate vein depth and, crucially, to improve accuracy across all skin tones.</p>
+
+                <h2>The Problem & Customer Discovery</h2>
+                <p>From our customer discovery, we learned that the #1 flaw in current vein finders is their "one-size-fits-all" approach. They provide no information on vein depth or usability, and their single-wavelength NIR design works poorly on patients with darker skin tones. This leads to failed sticks, patient discomfort, and wasted time.</p>
+                
+                <h3>Our Value Proposition:</h3>
+                <ul>
+                    <li><b>Depth Estimation:</b> Provide a "recommendation" (e.g., green, orange, red) based on calculated vein depth and diameter, not just visibility.</li>
+                    <li><b>Skin Tone Inclusivity:</b> Use multiple wavelengths to eliminate the disparity in performance between light and dark skin.</li>
+                </ul>
+
+                <h2>The Multi-Spectral Solution</h2>
+                <p>The core of our device is based on the physics of light absorption. Hemoglobin in the blood absorbs Near-Infrared (NIR) light. However, the ideal wavelength is a trade-off:
+                <ul>
+                    <li><b>Shorter Wavelengths (~755nm):</b> Hemoglobin absorption is highest, but the light scatters easily and doesn't penetrate deep.</li>
+                    <li><b>Longer Wavelengths (~850nm+):</b> Penetrates deeper and works better on darker skin, but water in the tissue also begins to absorb and scatter the light.</li>
+                </ul>
+                <p>By capturing three separate images at <b>760nm</b>, <b>860nm</b>, and <b>940nm</b>, our software can compare the relative vein diameter and visibility in each shot to build an approximate depth model, a task a single-wavelength device cannot do.</p>
+
+                <h2>My Role: Hardware Lead & PCB Design</h2>
+                <p>As the hardware lead, I was responsible for sourcing all components and designing the core electronics. This included selecting a <b>See3CAM_CU135M 4K monochrome camera</b> for its high sensitivity to IR light and designing a custom PCB in KiCad to drive the system.</p>
+                <p>The PCB's primary job is to power and control three separate banks of high-power LEDs. It uses <b>LDD-350L constant-current drivers</b> to ensure each LED bank (4x 760nm, 4x 860nm, 3x 940nm) receives a stable current.</p>
+
+                <h3>Engineering Challenge & Solution</h3>
+                <p>A key challenge was finding a robust way for the Jetson Nano to control the LED drivers. An initial design used a tiny I2C PWM-generator IC, but this chip proved to be a major failure point—it would constantly overheat or be destroyed by static.</p>
+                <p>The V2 design is far simpler and more robust: the Jetson's GPIO pins now <b>directly toggle the DIM (enable) pin on each LDD driver</b>. This allows the software to perform high-speed toggling of the LEDs with minimal, reliable hardware, removing the delicate IC entirely.</p>
+                
+                <figure>
+                    <img src="../pictures/vein_finder/schematic.png" alt="Vein Finder PCB Schematic" style="max-width: 650px; display: block; margin: auto;">
+                    <figcaption>KiCad schematic for the multi-wavelength LED driver board</figcaption>
+                </figure>
+                <figure>
+                    <img src="../pictures/vein_finder/pcb_layout.png" alt="Vein Finder PCB Layout" style="max-width: 650px; display: block; margin: auto;">
+                    <figcaption>KiCad PCB layout</figcaption>
+                </figure>
+
+                <h2>Software & Analysis Pipeline</h2>
+                <p>My hardware works in a high-speed loop with the Jetson Nano's software, which is being developed by the CS members of the team:</p>
+                <ol>
+                    <li><b>Capture:</b> The Jetson toggles the 760nm LEDs via my PCB, captures a frame, then repeats for 860nm and 940nm.</li>
+                    <li><b>Analysis:</b> A "hair mask" segmentation code is used to isolate only the veins. The algorithm then compares the vein's outer diameter in each of the 3 images to get relative depth information.</li>
+                    <li><b>Recommendation:</b> A linear approximation model generates a "recommendation" map, coloring veins Green (best), Orange (okay), or Red (worst).</li>
+                    <li><b>UI Livestream:</b> Finally, the system turns on the 850nm LEDs for a stable live view and overlays the color-coded recommendation map directly on top for the user.</li>
+                </ol>
+
+                <div class="project-links">
+                    <a href="#" class="button">View GitHub Repository</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Felix Hering</p>
+    </footer>
+</body>
+</html>

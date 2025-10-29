@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT Supersonics | Felix Hering</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Felix Hering</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-content">
+        <article>
+            <div class="project-header">
+                <h1>GT Supersonics Simulations Lead</h1>
+                <p class="project-meta">Fall 2023</p>
+                <div class="project-tags">
+                    <span class="tech-pill">Propulsion</span>
+                    <span class="tech-pill">NPSS Programming</span>
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Labview</span>
+                </div>
+            </div>
+
+            <div class="project-content">
+                <h2>Project Overview & Goal</h2>
+                <p>The primary goal was to capture exit flow velocities at various nozzle angles to analyze engine performance. The main challenge was that the existing manual data collection method was error-prone, not repeatable, and costly.</p>
+
+                <h2>Solution & Technical Details</h2>
+                <p>An automated data acquisition and validation system was developed to solve this problem. The solution involved several key components:</p>
+                
+                <h3>Simulation & Modeling:</h3>
+                <ul>
+                    <li>Modeled preliminary motors using Python and the Numerical Propulsion System Simulation (NPSS) to predict key propulsion parameters.</li>
+                </ul>
+
+                <h3>Automated Data Acquisition:</h3>
+                <ul>
+                    <li>Designed and implemented a LabView system that controlled a custom-built rotating pressure sensor rig.</li>
+                    <li>This new rig fully automated the angular sampling process, removing manual error.</li>
+                </ul>
+
+                <div class="project-media">
+                    <img src="../pictures/supersonics_testing_setup.png" alt="Testing Setup">
+                    <figcaption>Testing Setup</figcaption>
+                </div>
+                
+                <h3>Validation:</h3>
+                <ul>
+                    <li>Integrated the simulation results with the newly acquired experimental data to validate the complete system's behavior and ensure accuracy.</li>
+                </ul>
+
+
+                <h2>Impact</h2>
+                <p>The new automated system successfully delivered consistent, high-resolution velocity data. This provided a reliable dataset and significantly improved the team's confidence in its engine performance predictions.</p>
+                
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Felix Hering</p>
+    </footer>
+</body>
+</html>

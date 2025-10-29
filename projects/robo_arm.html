@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robo Arm Mimic | Felix Hering</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Light helpers in case style.css is minimal */
+        .inline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+        .callout { background: #0f172a0a; border: 1px solid #0f172a22; padding: 1rem; border-radius: 12px; }
+        .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: .95rem; }
+        .metrics { border-collapse: collapse; width: 100%; }
+        .metrics th, .metrics td { border: 1px solid #ddd; padding: 8px; }
+        .metrics th { background: #f4f6f8; text-align: left; }
+        figure { margin: 1.25rem auto; }
+        figcaption { font-size: .95rem; color: #475569; text-align: center; margin-top: .4rem; }
+        .video-wrapper { max-width: 720px; margin: 0 auto; }
+        .pill { display:inline-block; padding: .15rem .5rem; border: 1px solid #CBD5E1; border-radius: 999px; font-size: .85rem; color: #334155; margin-right: .25rem; }
+        .small { font-size: .9rem; color: #475569; }
+        .divider { height: 1px; background: #e5e7eb; margin: 1.5rem 0; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    </style>
+    <style>
+        .calib-gallery {
+        display: flex;
+        justify-content: center;     /* centers the whole row */
+        align-items: flex-start;     /* keeps tops aligned */
+        gap: 1.5rem;                 /* spacing between figures */
+        flex-wrap: wrap;             /* allows wrapping on narrow screens */
+        margin: 1.5rem 0;
+        }
+
+        .calib-gallery figure {
+        width: 300px;                /* fixed width for uniformity */
+        text-align: center;
+        margin: 0;
+        }
+
+        .calib-gallery img {
+        width: 100%;
+        height: 200px;               /* fixed height for consistent layout */
+        object-fit: cover;           /* crop to fill box evenly */
+        border-radius: 8px;
+        }
+
+        .calib-gallery figcaption {
+        font-size: 0.9rem;
+        color: #475569;
+        margin-top: 0.4rem;
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h1>Felix Hering</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-content">
+        <article>
+            <div class="project-header">
+                <h1>Robo Arm Mimic</h1>
+                <p class="project-meta">In Progress (Fall 2025)</p> 
+                <div class="project-tags">
+                    <span class="tech-pill">Robotics</span>
+                    <span class="tech-pill">Kinematics</span>
+                    <span class="tech-pill">MediaPipe</span>
+                    <span class="tech-pill">SolidWorks</span>
+                    <span class="tech-pill">PCB Design (KiCad)</span>
+                    <span class="tech-pill">STM32</span>
+                </div>
+            </div>
+
+            <div class="project-content">
+                
+                <h2>Project Overview</h2>
+                <p>This project is a 4-degree-of-freedom (DOF) serial robotic arm designed to mimic the movements of a human arm in real-time. A 3-DOF gimbal models the shoulder's motion, complemented by a 1-DOF elbow joint.</p>
+                <p>A computer vision pipeline using Google's MediaPipe model tracks the user's shoulder, elbow, and wrist. A custom kinematic model converts these 2D joint positions into robust 3D target angles. These angles are then sent from the laptop to an STM32 microcontroller, which controls the robot arm's servos to replicate the motion.</p>
+
+                <h2 id="pipeline">System Pipeline (Calibration → Tracking)</h2>
+                <div class="calib-gallery">
+                <figure>
+                    <img src="../pictures/robo_arm/calibration_pre.png" alt="Calibration UI screenshot" />
+                    <figcaption>Initial calibration screen.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../pictures/robo_arm/calibration_post.png" alt="Calibration UI screenshot" />
+                    <figcaption>Calibration screen: set reference lengths (<em>l1</em>, <em>l2</em>).</figcaption>
+                </figure>
+                <figure>
+                    <img src="../pictures/robo_arm/live_tracking.gif" alt="Live pose tracking overlay" />
+                    <figcaption>Live pose tracking: MediaPipe skeleton + live angle readout.</figcaption>
+                </figure>
+                </div>
+
+                <h2>Mechanical Design (SolidWorks)</h2>
+                <p>The entire arm and gimbal assembly were custom-designed in SolidWorks. The components are 3D-printed and incorporate bearings at key joints to ensure smooth, low-friction movement.</p>
+                <p>Servos were selected based on performance requirements: high-torque <b>MG996R</b> servos are used for the shoulder gimbal, which handles the largest loads, while lightweight, metal-geared <b>SG90</b> servos are used for the elbow and end-effector.</p>
+                
+                <figure>
+                    <img src="../pictures/robo_arm/hello.gif" alt="RoboArm Hello" style="max-width: 650px; display: block; margin: auto;">
+                    <figcaption>SolidWorks CAD model of the 4-DOF arm assembly</figcaption>
+                </figure>
+                
+                <h2>Electronics & PCB Design (KiCad)</h2>
+                <p>To safely handle the high current demands of four servos, a custom PCB was designed in KiCad. The MG996R servos can draw several amps under load, and the entire system is powered by a <b>5V / 8A</b> supply.</p>
+                <p>The PCB features a high-current screw terminal for power input and robust, wide traces for power delivery to the servo headers. This custom board prevents the STM32 from browning out and provides a clean, reliable integration point for all hardware.</p>
+
+                <figure>
+                    <img src="../pictures/robo_arm/schematic.png" alt="Robo Arm PCB Schematic" style="max-width: 650px; display: block; margin: auto;">
+                    <figcaption>KiCad schematic for the servo power board</figcaption>
+                </figure>
+                <figure>
+                    <img src="../pictures/robo_arm/pcb.png" alt="Robo Arm PCB Layout" style="max-width: 650px; display: block; margin: auto;">
+                    <figcaption>KiCad PCB layout showing power planes and servo headers</figcaption>
+                </figure>
+
+                <div class="divider"></div>
+
+
+                <h2 id="block-diagram">System Block Diagram</h2>
+                    <img src="../pictures/robo_arm/block_diagram.png" alt="Block Diagram" style="max-width: 650px; display: block; margin: auto;">
+                    <figcaption>Block Diagram</figcaption>
+
+                </div>
+
+                <h2>Kinematic Model: 2D Vision to 3D Angles</h2>
+                <p>The core challenge is converting the 2D pixel coordinates (x, y) from MediaPipe into the four 3D angles required to control the robot (3-DOF shoulder, 1-DOF elbow). This is solved with a kinematic model that runs in real-time.</p>
+                
+                <h3>Elbow Flexion</h3>
+                <p>The elbow's flexion angle is the easiest to find. It's calculated as the 2D angle between the upper arm vector (shoulder-to-elbow) and the forearm vector (elbow-to-wrist) using a simple dot product.</p>
+                
+                <h3>Shoulder Angles (Pitch, Yaw, and Roll)</h3>
+                <p>The 3-DOF shoulder is more complex. The Pitch (<code>thetay</code>, rotation around Y-axis) and Yaw (<code>thetaz</code>, rotation around Z-axis) are calculated by comparing the 2D (x, y) distances between the shoulder and elbow to the arm's *true* 3D length (<code>l1</code>), which is known from the scaling calibration.</p>
+                
+                <p style="text-align:center; font-family: 'Courier New', monospace; font-size: 1.1rem; margin: 1rem 0; line-height: 1.6;">
+                    &theta;<sub>z</sub> = arcsin( (a<sub>y</sub> - b<sub>y</sub>) / L<sub>1</sub> )
+                    <br>
+                    &theta;<sub>y</sub> = arccos( (a<sub>x</sub> - b<sub>x</sub>) / L<sub>1</sub> )
+                </p>
+
+                <h4>The "Roll" Angle (<code>thetax</code>)</h4>
+                <p>The most difficult angle to find is the shoulder's "roll" (<code>thetax</code>, rotation around the X-axis) because it describes the *twist* of the arm, which is not directly visible in 2D. This is solved with a clever 4-step process:</p>
+                <ol>
+                    <li><b>"Un-yaw" the Forearm:</b> The 2D forearm vector (<code>bc</code>) is digitally rotated by <code>-thetaz</code>. This brings it back to a flat plane, as if the shoulder had no yaw.</li>
+                    <li><b>Calculate Expected Height:</b> We calculate the *expected* 2D-projected height of the wrist in this flat plane, assuming there was zero roll. This "no-roll" height is calculated as: <code>L<sub>2</sub> * sin(elbow)</code>.</li>
+                    <li><b>Find Actual Height:</b> We take the *actual* Y-value of the "un-yawed" forearm vector from step 1.</li>
+                    <li><b>Compare & Solve:</b> The roll angle <code>thetax</code> is the difference between the actual and expected heights. It's the <code>arccos</code> of the ratio between them.</li>
+                </ol>
+
+                <p style="text-align:center; font-family: 'Courier New', monospace; font-size: 1.1rem; margin: 1rem 0; line-height: 1.6;">
+                    h<sub>actual</sub> = (Un-yawed <code>bc</code> vector)<sub>y</sub>
+                    <br>
+                    h<sub>expected</sub> = L<sub>2</sub> * sin(elbow)
+                    <br>
+                    &theta;<sub>x</sub> = arccos( h<sub>actual</sub> / h<sub>expected</sub> )
+                </p>
+
+
+                <h3>Key Code Snippet</h3>
+                <p>This logic is implemented in the main angle calculation function, which takes the MediaPipe landmarks (<code>a, b, c</code>) and the true arm lengths (<code>l1, l2</code>) to solve for all four angles.</p>
+                
+                <pre><code>
+def calculate_angle(shoulder_lm, elbow_lm, wrist_lm,
+                    ab_ref, bc_ref, degrees=True):
+
+    # a, b, c are 2D points (x,y)
+    a = np.array([shoulder_lm.x, shoulder_lm.y])
+    b = np.array([elbow_lm.x,    elbow_lm.y   ])
+    c = np.array([wrist_lm.x,    wrist_lm.y   ])
+
+    # ab and bc are 2D vectors
+    ab = _vec(a, b)
+    bc = _vec(b, c)
+
+    # l1 and l2 are the TRUE 3D lengths
+    l1 = np.linalg.norm(ab_ref)
+    l2 = np.linalg.norm(bc_ref)
+
+    # 1. Elbow Flexion (dot product)
+    elbow = _angle_between(-ab, bc)
+
+    # 2. Shoulder Yaw (based on Y-distance)
+    shoulder_rot_z = np.arcsin((a[1] - b[1]) / l1)
+
+    # 3. Shoulder Pitch (based on X-distance)
+    if a[0] - b[0] > l1:
+        shoulder_rot_y = 0
+    else:
+        shoulder_rot_y = np.arccos((a[0] - b[0]) / l1)
+
+    # 4. Shoulder Roll (the complex part)
+    # "Un-yaw" the forearm vector
+    bc_rot = -rotate_2d_z(bc, -shoulder_rot_z)
+    
+    # Calculate the expected "no-roll" height
+    yc_yb_real = l2 * np.sin(elbow)
+
+    # Find the ratio to solve for the roll angle
+    if bc_rot[1] > yc_yb_real:
+        shoulder_rot_x = 0
+    else:
+        shoulder_rot_x = np.arccos(bc_rot[1] / yc_yb_real)
+
+    return shoulder_rot_z, shoulder_rot_y, shoulder_rot_x, elbow
+                </code></pre>
+
+                <h2>Embedded Control (In Progress)</h2>
+                <p>The final link in the chain is an STM32 microcontroller. Its role is to receive the target angle data from the Python script via UART. The firmware (in development) will be responsible for generating the precise 50Hz (20ms) PWM signals required to drive each servo to its commanded position, bringing the robotic arm to life.</p>
+
+
+                <div class="project-links">
+                    <a href="#" class="button">View GitHub Repository</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Felix Hering</p>
+    </footer>
+</body>
+</html>
