@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me | Felix Hering</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <h1>Felix Hering</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../resume.html">Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>A Little More About Me</h2>
+      <div class="project-content">
+        <p>
+          I’m a mechanical engineering student at Georgia Tech with a robotics minor. Most of what I do sits somewhere between mechanical, electrical, and software systems. I like building things that actually work and figuring out the messy parts where hardware and software meet.
+        </p>
+
+        <p>
+          I started out on GT Solar Racing and Marine Robotics, which got me into hands-on design and testing. Then I joined the EcoCAR EV Challenge to get more experience with larger, system-level projects. After that I co-oped at W. L. Gore &amp; Associates, where I investigated RF coax cable corrosion and wrote a Python tool that automated VNA data parsing and test reporting for the entire floor.
+        </p>
+
+        <p>
+          With GT Supersonics, I modeled propulsion systems in NPSS, built LabVIEW data acquisition setups for engine testing, and worked on a servo-controlled pitot-static probe to measure nozzle exit velocity. That’s when I started getting into mechatronics and controls.
+        </p>
+
+        <p>
+          Lately I’ve been focused on embedded systems, perception, and control. I’m building a smart vein finder through Create-X, a clinical imaging project with Emory Healthcare, and a robotic arm that mimics human motion in real time using computer vision, kinematics, and STM32 control. I like projects that feel like real systems rather than just circuits or code running on their own.
+        </p>
+
+        <h3>Selected Highlights</h3>
+        <ul>
+          <li>
+            <strong>NIR Vein Finder (Create-X)</strong>: Designed the full hardware stack including custom PCB with constant-current LED drivers and I²C control, triple wavelength NIR illumination around 760, 860, and 940 nm, and a Jetson for processing. The GUI highlights the best veins based on depth, diameter, and straightness. Everything from optics to power routing was designed from scratch.
+          </li>
+          <li>
+            <strong>Robo Arm Mimic</strong>: A four degree of freedom robotic arm that mirrors human movement using OpenCV and OpenPose for joint tracking, inverse kinematics for angle solving, and an STM32 microcontroller that drives the servos. Designed the CAD, wiring, and a high current PCB to keep the system stable under load.
+          </li>
+          <li>
+            <strong>Clinical RGB-D Imaging (Emory)</strong>: Built a dual OAK-D Pro W camera setup for radiation therapy patient visualization. Developed Python pipelines for extrinsic calibration, timestamp pairing, and point cloud fusion using Open3D and DepthAI.
+          </li>
+          <li>
+            <strong>Supersonics Propulsion</strong>: Modeled propulsion systems in NPSS, created LabVIEW data acquisition systems for the test stand, and helped automate nozzle velocity measurements with a servo sweep and pitot probe.
+          </li>
+          <li>
+            <strong>RF Cable Reliability (Gore)</strong>: Ran corrosion and oxidation experiments, used XPS for surface analysis, and wrote a Python tool that automated RF and VSWR reports for multiple test teams.
+          </li>
+        </ul>
+
+        <p>
+          I like systems that you can measure, debug, and trust. If it involves PCB layout, firmware, calibration, and real-time data, that’s usually where I end up. I’m drawn to problems that mix mechanics, electronics, and computation in a single loop.
+        </p>
+
+        <p>
+          Outside of work I produce music in FL Studio and Ableton and mess around with sound design. I’ve been building a project called StepperSynth, a microcontroller-based musical device with a custom PCB, just for fun and to learn more about hardware audio systems.
+          Some of my music and projects are up on my <a href="https://www.youtube.com/@felixhering" target="_blank">YouTube channel</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
