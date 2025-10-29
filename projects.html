@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felix Hering - Projects</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Temporary fix - add this to your style.css later */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            color: #333; /* Ensures text is dark */
+            text-decoration: none;
+            display: block;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .project-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .project-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-details ul {
+            margin-left: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-details li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tech-pill {
+            background: #e0e7ff;
+            color: #3b82f6;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Felix Hering</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+<main>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-grid">
+                
+                <a href="projects/robo_arm.html" class="project-card">
+                    <h3>Robotic Arm Mimic</h3>
+                    <p class="project-date">Fall 2025 (Ongoing)</p>
+                    <div class="project-details">
+                        <p>A 4-DOF robot designed to mirror human arm movements, translating Google OpenPose joint-tracking data into real-time servo control via an STM32 and custom PCB.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">Robotics</span>
+                        <span class="tech-pill">Computer Vision</span>
+                        <span class="tech-pill">SolidWorks</span>
+                        <span class="tech-pill">STM32</span>
+                        <span class="tech-pill">KiCad</span>
+                        <span class="tech-pill">3D Printing</span>
+                    </div>
+                </a>
+
+                <a href="projects/stepper_synth.html" class="project-card">
+                    <h3>Vision-Controlled Stepper Synthesizer</h3>
+                    <p class="project-date">Spring 2025</p>
+                    <div class="project-details">
+                        <p>A novel musical instrument that generates tones from stepper motor vibrations. Features a custom KiCad PCB for high-current control and an OpenCV vision system that turns a printed piano into a playable interface.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">Embedded Systems</span>
+                        <span class="tech-pill">STM32</span>
+                        <span class="tech-pill">OpenCV</span>
+                        <span class="tech-pill">KiCad</span>
+                        <span class="tech-pill">PCB Design</span>
+                    </div>
+                </a>
+                
+                <a href="projects/supersonics.html" class="project-card">
+                    <h3>GT Supersonics Simulations Lead</h3>
+                    <p class="project-date">Fall 2024</p>
+                    <div class="project-details">
+                        <p>Led propulsion analysis to optimize engine performance. Designed a LabView-based test rig to automate nozzle velocity sampling, replacing error-prone manual data collection with a high-resolution, repeatable process.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">NPSS</span>
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">LabView</span>
+                        <span class="tech-pill">Data Acquisition</span>
+                    </div>
+                </a>
+                
+                <a href="projects/werl.html" class="project-card">
+                    <h3>Water-Energy Research Lab: Desalination Prototype</h3>
+                    <p class="project-date">Summer 2024</p>
+                    <div class="project-details">
+                        <p>Designed, 3D printed, and tested a novel membrane desalination prototype in SolidWorks. Developed a LabVIEW data acquisition system to perform real-time thermal analysis and validate the system's efficiency.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">SolidWorks</span>
+                        <span class="tech-pill">LabVIEW</span>
+                        <span class="tech-pill">Thermal Analysis</span>
+                        <span class="tech-pill">3D Printing</span>
+                    </div>
+                </a>
+                
+                <a href="projects/me_2110.html" class="project-card">
+                    <h3>ME 2110 Robotics Competition</h3>
+                    <p class="project-date">Summer 2023 | 1st Place</p>
+                    <div class="project-details">
+                        <p>Achieved 1st Place in a head-to-head robotics competition. Designed and built a complex autonomous robot from scratch, integrating pneumatic actuators, servo control, and rapid prototyping (3D printing, laser-cutting) to meet tight deadlines.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">Servo Control</span>
+                        <span class="tech-pill">Pneumatics</span>
+                        <span class="tech-pill">Rapid Prototyping</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+    </main>
+</body>
+</html>
