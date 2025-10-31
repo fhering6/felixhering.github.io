@@ -49,6 +49,32 @@
         color: #475569;
         margin-top: 0.4rem;
         }
+
+        .video-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap; /* Allows stacking on small screens */
+            margin: 1.5rem 0;
+        }
+
+        .video-gallery figure {
+            flex: 1 1 400px; /* Each video figure can grow/shrink, with a base of 400px */
+            max-width: 600px; /* Optional: limits how large they get */
+            margin: 0;
+        }
+
+        .video-gallery video {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .video-gallery figcaption {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-top: 0.4rem;
+            text-align: center;
+        }
     </style>
     
 </head>
@@ -214,9 +240,21 @@ def calculate_angle(shoulder_lm, elbow_lm, wrist_lm,
     return shoulder_rot_z, shoulder_rot_y, shoulder_rot_x, elbow
                 </code></pre>
 
-                <h2>Embedded Control (In Progress)</h2>
-                <p>The final link in the chain is an STM32 microcontroller. Its role is to receive the target angle data from the Python script via UART. The firmware (in development) will be responsible for generating the precise 50Hz (20ms) PWM signals required to drive each servo to its commanded position, bringing the robotic arm to life.</p>
-
+                <h2>Demo Video</h2>
+                    <div class="video-gallery">
+                        <figure>
+                            <video controls>
+                                <source src="../pictures/robo_arm/demo1.mp4" type="video/mp4">
+                            </video>
+                            <figcaption>Demo: CV tracking and code view</figcaption>
+                        </figure>
+                        <figure>
+                            <video controls>
+                                <source src="../pictures/robo_arm/demo2.mp4" type="video/mp4">
+                            </video>
+                            <figcaption>Demo: Real-time robot mimicry</figcaption>
+                        </figure>
+                    </div>
 
                 <div class="project-links">
                     <a href="#" class="button">View GitHub Repository</a>
