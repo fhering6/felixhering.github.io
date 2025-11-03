@@ -2,72 +2,173 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Me | Felix Hering</title>
-    <link rel="stylesheet" href="../style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felix Hering</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Felix Hering</h1>
-    <nav>
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../projects.html">Projects</a></li>
-        <li><a href="../resume.html">Resume</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <h1>Felix Hering</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I’m a mechanical engineering student at Georgia Tech with a robotics minor. Most of what I do lives in the overlap between mechanical, electrical, and software systems. I like building complete systems and figuring out how all the hardware, firmware, and code tie together. I’m still deciding what comes next after undergrad. Grad school in robotics or electrical engineering is possible, but what matters to me more is doing work that’s technical, fast-paced, and genuinely interesting. I like projects that blend modeling, control, and data collection: anything that forces you to understand both the physics and the code. At the end of the day, I care about learning useful things and building stuff that actually works.
+            </p>
+        </section>
 
-  <main>
-    <section id="about">
-      <h2>A Little More About Me</h2>
-      <div class="project-content">
-        <p>
-          I’m a mechanical engineering student at Georgia Tech with a robotics minor. Most of what I do sits somewhere between mechanical, electrical, and software systems. I like building things that actually work and figuring out the messy parts where hardware and software meet.
-        </p>
+        <section id="featured-projects">
+            <h2>Featured Projects</h2>
+            <div class="featured-grid">
+                <div class="project-card featured">
+                    <div class="featured-badge">🌟 Featured</div>
+                    <h3>Vision-Controlled Stepper Synthesizer</h3>
+                    <p class="project-date">Spring 2025</p>
+                    <div class="project-details">
+                        <p>A novel musical instrument that generates tones from stepper motor vibrations. Features a custom KiCad PCB for high-current control and an OpenCV vision system that turns a printed piano into a playable interface.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">STM32</span>
+                        <span class="tech-pill">OpenCV</span>
+                        <span class="tech-pill">KiCad</span>
+                        <span class="tech-pill">Embedded C</span>
+                    </div>
+                    <a href="projects/stepper_synth.html" class="cta-button">See Project Details →</a>
+                </div>
+        
+                <div class="project-card featured">
+                    <div class="featured-badge">🏆 Award Winner</div>
+                    <h3>ME 2110 Robotics Competition</h3>
+                    <p class="project-date">Summer 2023 | 1st Place</p>
+                    <div class="project-details">
+                        <p>Achieved 1st Place in a head-to-head robotics competition. Designed and built an autonomous robot from scratch, integrating pneumatic actuators, servo control, and rapid prototyping to meet strict deadlines.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">Arduino</span>
+                        <span class="tech-pill">Pneumatics</span>
+                        <span class="tech-pill">3D Printing</span>
+                        <span class="tech-pill">Servo Control</span>
+                    </div>
+                    <a href="projects/me_2110.html" class="cta-button">See Project Details →</a>
+                </div>
+            </div>
+        </section>
 
-        <p>
-          I started out on GT Solar Racing and Marine Robotics, which got me into hands-on design and testing. Then I joined the EcoCAR EV Challenge to get more experience with larger, system-level projects. After that I co-oped at W. L. Gore &amp; Associates, where I investigated RF coax cable corrosion and wrote a Python tool that automated VNA data parsing and test reporting for the entire floor.
-        </p>
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                
+                <div class="skills-category">
+                    <h3>Software & Simulation</h3>
+                    <div class="skills-list">
+                        <span class="tech-pill">Python (OpenCV, NumPy)</span>
+                        <span class="tech-pill">C/C++ (STM32 HAL, Arduino)</span>
+                        <span class="tech-pill">MATLAB & Simulink</span>
+                        <span class="tech-pill">LabVIEW</span>
+                        <span class="tech-pill">SolidWorks</span>
+                        <span class="tech-pill">KiCad</span>
+                        <span class="tech-pill">ANSYS, NPSS</span>
+                        <span class="tech-pill">ROS2</span>
+                        <span class="tech-pill">Linux</span>
+                    </div>
+                </div>
 
-        <p>
-          With GT Supersonics, I modeled propulsion systems in NPSS, built LabVIEW data acquisition setups for engine testing, and worked on a servo-controlled pitot-static probe to measure nozzle exit velocity. That’s when I started getting into mechatronics and controls.
-        </p>
+                <div class="skills-category">
+                    <h3>Hardware & Embedded Systems</h3>
+                    <div class="skills-list">
+                        <span class="tech-pill">PCB Design & Layout</span>
+                        <span class="tech-pill">STM32 (Timers, PWM, UART)</span>
+                        <span class="tech-pill">Sensors & DAQ</span>
+                        <span class="tech-pill">Servo & Stepper Control</span>
+                        <span class="tech-pill">Power Electronics</span>
+                        <span class="tech-pill">I2C, UART, SPI</span>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <h3>Manufacturing & Prototyping</h3>
+                    <div class="skills-list">
+                        <span class="tech-pill">3D Printing (FDM)</span>
+                        <span class="tech-pill">Laser Cutting</span>
+                        <span class="tech-pill">CNC Machining</span>
+                        <span class="tech-pill">Waterjet Cutting</span>
+                        <span class="tech-pill">Rapid Prototyping</span>
+                    </div>
+                </div>
 
-        <p>
-          Lately I’ve been focused on embedded systems, perception, and control. I’m building a smart vein finder through Create-X, a clinical imaging project with Emory Healthcare, and a robotic arm that mimics human motion in real time using computer vision, kinematics, and STM32 control. I like projects that feel like real systems rather than just circuits or code running on their own.
-        </p>
+                <div class="skills-category">
+                    <h3>Core Engineering & Analysis</h3>
+                    <div class="skills-list">
+                        <span class="tech-pill">Mechatronics</span>
+                        <span class="tech-pill">Robotics</span>
+                        <span class="tech-pill">Control Systems</span>
+                        <span class="tech-pill">Machine Design</span>
+                        <span class="tech-pill">Heat Transfer</span>
+                        <span class="tech-pill">Fluid Mechanics</span>
+                        <span class="tech-pill">Thermodynamics</span>
+                        <span class="tech-pill">Signal Processing</span>
+                    </div>
+                </div>
 
-        <h3>Selected Highlights</h3>
-        <ul>
-          <li>
-            <strong>NIR Vein Finder (Create-X)</strong>: Designed the full hardware stack including custom PCB with constant-current LED drivers and I²C control, triple wavelength NIR illumination around 760, 860, and 940 nm, and a Jetson for processing. The GUI highlights the best veins based on depth, diameter, and straightness. Everything from optics to power routing was designed from scratch.
-          </li>
-          <li>
-            <strong>Robo Arm Mimic</strong>: A four degree of freedom robotic arm that mirrors human movement using OpenCV and OpenPose for joint tracking, inverse kinematics for angle solving, and an STM32 microcontroller that drives the servos. Designed the CAD, wiring, and a high current PCB to keep the system stable under load.
-          </li>
-          <li>
-            <strong>Clinical RGB-D Imaging (Emory)</strong>: Built a dual OAK-D Pro W camera setup for radiation therapy patient visualization. Developed Python pipelines for extrinsic calibration, timestamp pairing, and point cloud fusion using Open3D and DepthAI.
-          </li>
-          <li>
-            <strong>Supersonics Propulsion</strong>: Modeled propulsion systems in NPSS, created LabVIEW data acquisition systems for the test stand, and helped automate nozzle velocity measurements with a servo sweep and pitot probe.
-          </li>
-          <li>
-            <strong>RF Cable Reliability (Gore)</strong>: Ran corrosion and oxidation experiments, used XPS for surface analysis, and wrote a Python tool that automated RF and VSWR reports for multiple test teams.
-          </li>
-        </ul>
+            </div>
+        </section>
 
-        <p>
-          I like systems that you can measure, debug, and trust. If it involves PCB layout, firmware, calibration, and real-time data, that’s usually where I end up. I’m drawn to problems that mix mechanics, electronics, and computation in a single loop.
-        </p>
+        <section id="interests">
+            <h2>Interests</h2>
+            <div class="interests-grid">
+                
+                <div class="interest-card">
+                    <div class="interest-icon">🩺</div>
+                    <h3>Med Tech</h3>
+                    <p>Fascinated by medical devices, from diagnostic imaging to robotic-assisted surgery.</p>
+                </div>
 
-        <p>
-          Outside of work I produce music in FL Studio and Ableton and mess around with sound design. I’ve been building a project called StepperSynth, a microcontroller-based musical device with a custom PCB, just for fun and to learn more about hardware audio systems.
-          Some of my music and projects are up on my <a href="https://www.youtube.com/@felixhering" target="_blank">YouTube channel</a>.
-        </p>
-      </div>
-    </section>
-  </main>
+                <div class="interest-card">
+                    <div class="interest-icon">🚀</div>
+                    <h3>Robotics</h3>
+                    <p>Robotics enthusiast with particular interest in controls</p>
+                </div>
+
+                <div class="interest-card">
+                    <div class="interest-icon">✈️</div>
+                    <h3>Aerospace Tech</h3>
+                    <p>Aviation enthusiast with particular interest in propulsion systems and analysis</p>
+                </div>
+                
+                <div class="interest-card">
+                    <div class="interest-icon">♻️</div>
+                    <h3>Sustainable Tech</h3>
+                    <p>Passionate about renewable energy systems and eco-friendly engineering solutions</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>
+                <a href="mailto:felix.hering@outlook.com">felix.hering@outlook.com</a>
+            </p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/felix-hering-5821bb216/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/felixhering" target="_blank">GitHub</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Felix Hering. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
