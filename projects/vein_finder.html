@@ -22,68 +22,229 @@
     <main class="project-content">
         <article>
             <div class="project-header">
-                <h1>Smart Vein Finder Imaging System</h1>
-                <p class="project-meta">Fall 2025 (Create X Startup Class)</p> 
+                <h1>FirstStick: Intelligent Vein Finder</h1>
+                <p class="project-meta">Fall 2025 | Georgia Tech Create X</p> 
                 <div class="project-tags">
-                    <span class="tech-pill">Med Tech</span>
+                    <span class="tech-pill">Medical Device</span>
                     <span class="tech-pill">PCB Design (KiCad)</span>
-                    <span class="tech-pill">NVIDIA Jetson</span>
+                    <span class="tech-pill">NVIDIA Jetson Nano</span>
                     <span class="tech-pill">Computer Vision</span>
-                    <span class="tech-pill">Embedded Systems</span>
-                    <span class="tech-pill">Hardware Sourcing</span>
+                    <span class="tech-pill">Machine Learning</span>
+                    <span class="tech-pill">NIR Imaging</span>
+                    <span class="tech-pill">Hardware Integration</span>
                 </div>
             </div>
 
             <div class="project-content">
                 
                 <h2>Project Overview</h2>
-                <p>As part of Georgia Tech's Create X startup class, our team (two CS, one BME, and myself as hardware lead) is developing a low-cost, intelligent vein finder. Unlike existing devices that provide a simple 2D map, our solution uses multi-spectral imaging to estimate vein depth and, crucially, to improve accuracy across all skin tones.</p>
-
-                <h2>The Problem & Customer Discovery</h2>
-                <p>From our customer discovery, we learned that the #1 flaw in current vein finders is their "one-size-fits-all" approach. They provide no information on vein depth or usability, and their single-wavelength NIR design works poorly on patients with darker skin tones. This leads to failed sticks, patient discomfort, and wasted time.</p>
+                <p>As hardware lead on a four-person interdisciplinary team (two CS, one BME, one ME) in Georgia Tech's Create X startup program, I developed FirstStick: an affordable, intelligent vein-finding device that goes beyond simple visualization to provide algorithmic site recommendations for venipuncture.</p>
                 
-                <h3>Our Value Proposition:</h3>
+                <p>Unlike existing $4,000-$15,000 solutions that merely project vein images, our device uses multi-wavelength NIR imaging combined with real-time machine learning to rank veins by depth, diameter, and straightness, directly addressing the root cause of the 27% first-attempt failure rate in venipuncture procedures.</p>
+
+                <div class="key-stats">
+                    <div class="stat">
+                        <h3>83%</h3>
+                        <p>Agreement rate with clinician site selection in blind study (N=80 trials)</p>
+                    </div>
+                    <div class="stat">
+                        <h3>$736</h3>
+                        <p>Prototype BOM cost (target $300 in mass production)</p>
+                    </div>
+                    <div class="stat">
+                        <h3>CNR > 2.5</h3>
+                        <p>Maintained contrast-to-noise ratio even on Type VI skin tones</p>
+                    </div>
+                </div>
+
+                <h2>The Clinical Problem</h2>
+                <p>Through 90 customer discovery interviews with nurses, phlebotomists, and physicians across diverse clinical settings, we identified critical gaps in existing vein visualization technology:</p>
+                
                 <ul>
-                    <li><b>Depth Estimation:</b> Provide a "recommendation" (e.g., green, orange, red) based on calculated vein depth and diameter, not just visibility.</li>
-                    <li><b>Skin Tone Inclusivity:</b> Use multiple wavelengths to eliminate the disparity in performance between light and dark skin.</li>
+                    <li><strong>No Decision Support:</strong> Current devices show vein maps but don't recommend which vein to use, forcing clinicians to interpret raw images without algorithmic guidance</li>
+                    <li><strong>Poor Performance on Darker Skin:</strong> Single-wavelength NIR systems show reduced effectiveness across melanin levels, contributing to healthcare disparities</li>
+                    <li><strong>Cost Barriers:</strong> Ultrasound systems ($10,000+) and high-end NIR projectors ($4,000-$15,000) are inaccessible to smaller clinics</li>
+                    <li><strong>Limited Depth Information:</strong> Existing solutions can't distinguish between superficial and deeper veins, leading to poor site selection</li>
                 </ul>
 
-                <h2>The Multi-Spectral Solution</h2>
-                <p>The core of our device is based on the physics of light absorption. Hemoglobin in the blood absorbs Near-Infrared (NIR) light. However, the ideal wavelength is a trade-off:
-                <ul>
-                    <li><b>Shorter Wavelengths (~755nm):</b> Hemoglobin absorption is highest, but the light scatters easily and doesn't penetrate deep.</li>
-                    <li><b>Longer Wavelengths (~850nm+):</b> Penetrates deeper and works better on darker skin, but water in the tissue also begins to absorb and scatter the light.</li>
-                </ul>
-                <p>By capturing three separate images at <b>760nm</b>, <b>860nm</b>, and <b>940nm</b>, our software can compare the relative vein diameter and visibility in each shot to build an approximate depth model, a task a single-wavelength device cannot do.</p>
+                <h2>My Role: Hardware Lead & System Integration</h2>
+                <p>As hardware lead, I owned the complete electronics design, component sourcing, and hardware-software integration. This included:</p>
 
-                <h2>My Role: Hardware Lead & PCB Design</h2>
-                <p>As the hardware lead, I was responsible for sourcing all components and designing the core electronics. This included selecting a <b>See3CAM_CU135M 4K monochrome camera</b> for its high sensitivity to IR light and designing a custom PCB in KiCad to drive the system.</p>
-                <p>The PCB's primary job is to power and control three separate banks of high-power LEDs. It uses <b>LDD-350L constant-current drivers</b> to ensure each LED bank (4x 760nm, 4x 860nm, 3x 940nm) receives a stable current.</p>
+                <h3>Camera System Selection & Integration</h3>
+                <p>Selected and integrated the <strong>See3CAM_CU135M</strong> (AR1335 13MP monochrome sensor) for its exceptional NIR sensitivity. Configured the camera for 2×2 and 4×4 pixel binning to achieve usable frame rates under low-light NIR illumination while maintaining the resolution needed for 2mm vessel detection.</p>
 
-                <h3>Engineering Challenge & Solution</h3>
-                <p>A key challenge was finding a robust way for the Jetson Nano to control the LED drivers. An initial design used a tiny I2C PWM-generator IC, but this chip proved to be a major failure point—it would constantly overheat or be destroyed by static.</p>
-                <p>The V2 design is far simpler and more robust: the Jetson's GPIO pins now <b>directly toggle the DIM (enable) pin on each LDD driver</b>. This allows the software to perform high-speed toggling of the LEDs with minimal, reliable hardware, removing the delicate IC entirely.</p>
+                <h3>Custom PCB Design Evolution</h3>
+                <p>Designed two iterations of the LED driver board in KiCad:</p>
                 
+                <div class="project-side-by-side">
+                    <div class="text">
+                        <h4>Version 1 (Failed)</h4>
+                        <p>Initial design used LDD-350L constant-current drivers with an I2C PWM controller IC for coordinated LED switching. The board experienced catastrophic failure during testing due to:</p>
+                        <ul>
+                            <li>Incorrect SMD LED footprint orientation creating poor return paths</li>
+                            <li>Complex LED driver interface that was difficult to debug</li>
+                            <li>Insufficient grounding verification in the driver stage</li>
+                        </ul>
+                        <p>This failure was a critical learning experience in power electronics design and the importance of thorough grounding verification before fabrication.</p>
+                    </div>
+                    
+                    <figure>
+                        <img src="../pictures/vein_finder/v1_pcb_failure.png" alt="Version 1 PCB showing burn damage" style="max-width: 230px;">
+                        <figcaption>Version 1 PCB after failure</figcaption>
+                    </figure>
+                </div>
+
+                <h4>Version 2 (Production Prototype)</h4>
+                <p>Completely redesigned with a simplified, robust architecture:</p>
+                <ul>
+                    <li><strong>Direct GPIO Control:</strong> Eliminated the problematic I2C controller; Jetson Nano GPIO pins now directly drive logic-level MOSFETs (one per wavelength channel)</li>
+                    <li><strong>Discrete Current Limiting:</strong> Series resistors calculate LED current from the 12V supply, avoiding complex driver ICs during prototyping</li>
+                    <li><strong>Improved Debuggability:</strong> Each LED channel can be tested independently with basic multimeter measurements</li>
+                    <li><strong>Three-Wavelength Architecture:</strong> 6× 720nm LEDs, 3× 860nm LEDs, 3× 940nm LEDs arranged in a ring around the camera aperture</li>
+                </ul>
+
                 <figure>
-                    <img src="../pictures/vein_finder/schematic.png" alt="Vein Finder PCB Schematic" style="max-width: 650px; display: block; margin: auto;">
-                    <figcaption>KiCad schematic for the multi-wavelength LED driver board</figcaption>
-                </figure>
-                <figure>
-                    <img src="../pictures/vein_finder/pcb_layout.png" alt="Vein Finder PCB Layout" style="max-width: 650px; display: block; margin: auto;">
-                    <figcaption>KiCad PCB layout</figcaption>
+                    <img src="../pictures/vein_finder/schematic.png" alt="Version 2 PCB Schematic" class="standard-img">
+                    <figcaption>Simplified V2 schematic—MOSFETs with gate resistors/pull-downs, discrete LED current limiting</figcaption>
                 </figure>
 
-                <h2>Software & Analysis Pipeline</h2>
-                <p>My hardware works in a high-speed loop with the Jetson Nano's software, which is being developed by the CS members of the team:</p>
+                <div class="side-by-side-container">
+                    <figure>
+                        <img src="../pictures/vein_finder/pcb_bottom.png" alt="PCB bottom with LED ring" style="max-width: 275px;">
+                        <figcaption>PCB bottom view with LED ring</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../pictures/vein_finder/pcb_top.png" alt="PCB top with MOSFETs" style="max-width: 400px;">
+                        <figcaption>PCB top view with MOSFETs and protection circuitry</figcaption>
+                    </figure>
+                </div>
+
+                <h3>Optical Design & Component Selection</h3>
+                <ul>
+                    <li><strong>Bandpass Filter:</strong> Sourced and integrated 700-1100nm filter to reject visible light and reduce ambient interference</li>
+                    <li><strong>Diffuser System:</strong> Selected elliptical PMMA diffuser to eliminate LED hotspots and improve illumination uniformity—critical for stable segmentation performance</li>
+                    <li><strong>Fixed Working Distance:</strong> Designed mechanical geometry to maintain ~8-inch camera-to-skin distance, optimizing for depth of field and contrast</li>
+                </ul>
+
+                <h3>Mechanical Design</h3>
+                <p>Led the evolution from an unstable handheld concept to a robust C-shaped stand-mounted design:</p>
+                <ul>
+                    <li>Iteratively designed four interlocking FDM-printed PLA components with press-fit joints (10mm male / 10.25mm female geometry)</li>
+                    <li>Added curved ergonomic arm rest to ensure repeatable patient positioning</li>
+                    <li>Enlarged base and integrated non-slip silicone pad to eliminate tipping under lateral forces</li>
+                    <li>Final assembly: 36 × 25 × 25 cm, 1.76 kg</li>
+                </ul>
+
+                <div class="side-by-side-container">
+                    <figure>
+                        <img src="../pictures/vein_finder/final_device.png" alt="Final assembled device" style="width: 1400px;">
+                        <figcaption>Final C-shaped design with curved arm, integrated arm rest, and LCD mount</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../pictures/vein_finder/exploded_view.png" alt="Exploded view of device assembly" style="max-width: 300px;">
+                        <figcaption>Exploded view showing component integration: base, curved arm, top plate, imaging stack, and LCD lid</figcaption>
+                    </figure>
+                </div>
+
+
+                <figure>
+                    <img src="../pictures/vein_finder/internal_optics.png" alt="Internal view of imaging stack">
+                    <figcaption>Internal view of the imaging stack: camera, LED ring, diffuser, and bandpass filter arrangement</figcaption>
+                </figure>
+
+                <h2>The Multi-Wavelength Physics</h2>
+                <p>Our depth estimation approach is grounded in the wavelength-dependent optical properties of tissue:</p>
+                
+                <h3>Hemoglobin Absorption vs. Tissue Scattering Trade-off</h3>
+                <ul>
+                    <li><strong>740nm:</strong> Maximum hemoglobin absorption contrast but high tissue scattering—best for superficial veins</li>
+                    <li><strong>860nm:</strong> Balanced penetration and absorption—works across skin tones</li>
+                    <li><strong>940nm:</strong> Deepest penetration but reduced contrast due to water absorption</li>
+                </ul>
+
+                <p>By capturing three sequential exposures and comparing relative vein visibility across wavelengths, our U-Net-ResNet34 segmentation model can infer relative depth ordering without requiring absolute depth calibration.</p>
+
+                <h2>System Architecture & Real-Time Operation</h2>
+                <p>The complete imaging pipeline operates as follows:</p>
+
                 <ol>
-                    <li><b>Capture:</b> The Jetson toggles the 760nm LEDs via my PCB, captures a frame, then repeats for 860nm and 940nm.</li>
-                    <li><b>Analysis:</b> A "hair mask" segmentation code is used to isolate only the veins. The algorithm then compares the vein's outer diameter in each of the 3 images to get relative depth information.</li>
-                    <li><b>Recommendation:</b> A linear approximation model generates a "recommendation" map, coloring veins Green (best), Orange (okay), or Red (worst).</li>
-                    <li><b>UI Livestream:</b> Finally, the system turns on the 850nm LEDs for a stable live view and overlays the color-coded recommendation map directly on top for the user.</li>
+                    <li><strong>Sequential Capture:</strong> Jetson Nano GPIO toggles each wavelength bank via my PCB MOSFETs, captures synchronized frame from camera (time-multiplexed illumination)</li>
+                    <li><strong>Preprocessing:</strong> CLAHE contrast enhancement, hair artifact removal via morphological filtering</li>
+                    <li><strong>Segmentation:</strong> U-Net-ResNet34 model (trained on N=200 annotated images) produces binary vein mask</li>
+                    <li><strong>Vein Ranking Algorithm:</strong> Analyzes each candidate vein for:
+                        <ul>
+                            <li>Relative depth (multi-wavelength visibility comparison)</li>
+                            <li>Diameter (≥2mm threshold via full-width half-maximum)</li>
+                            <li>Path straightness (curvature analysis)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Live Display:</strong> Overlay top 3 ranked sites on real-time video feed with confidence indicators</li>
                 </ol>
 
+                <figure>
+                    <img src="../pictures/vein_finder/gui_interface.png" alt="User interface showing live vein overlay" class="standard-img">
+                    <figcaption>User interface: live camera feed with ranked vein overlay and confidence indicators</figcaption>
+                </figure>
+
+                <p><strong>Performance:</strong> Achieved ~2 fps effective update rate on Jetson Nano prototype with sub-second total latency from capture to recommendation display.</p>
+
+                <h2>Validation & Testing Results</h2>
+
+                <h3>Contrast Performance Across Skin Tones</h3>
+                <p>Conducted pixel-level CNR analysis across Fitzpatrick skin tone classifications (N=200 images), where contrast-to-noise ratio is defined as:</p>
+                
+                <p style="text-align:center; font-family: 'Courier New', monospace; font-size: 1.1rem; margin: 1rem 0;">
+                    CNR = (μ<sub>background</sub> − μ<sub>vein</sub>) / σ<sub>background</sub>
+                </p>
+
+                <video>
+                    <img src="../pictures/vein_finder/cnr_plot.png" alt="CNR distribution across skin tones" class="standard-img">
+                    <figcaption>CNR distribution across Fitzpatrick skin tone types—median CNR remains above 2.5 even for Type VI</figcaption>
+                </video>
+
+                <p>Key findings:</p>
+                <ul>
+                    <li>Type I-II: Median CNR ≈ 4.0</li>
+                    <li>Type V-VI: Median CNR ≈ 2.6-3.0</li>
+                    <li><strong>All skin tones maintained CNR > 2.5</strong>—sufficient for reliable segmentation</li>
+                </ul>
+
+                <h3>Clinical Blind Study</h3>
+                <p>8 phlebotomists, ~10 selections each (≈80 trials total):</p>
+                <ul>
+                    <li><strong>83% agreement rate</strong> between clinician first choice and device top-ranked recommendation</li>
+                    <li>Validation that algorithmic ranking aligns with expert clinical judgment</li>
+                    <li><em>Limitation:</em> Dataset skewed young/male; lacks elderly and diverse body types</li>
+                </ul>
+
+                <h3>Algorithm Performance</h3>
+                <ul>
+                    <li>U-Net segmentation accuracy: ~92% on internal test split</li>
+                    <li>Inference + display latency: typically <0.4s per frame update</li>
+                </ul>
+                <h2>Live Demo</h2>
+                <p>The video below demonstrates FirstStick operating in real-time on an actual subject. Watch as the device continuously analyzes the vein structure and provides live recommendations for the optimal venipuncture site. The faint red light flashing throughout the video is the 720nm NIR LED bank cycling during the multi-wavelength capture sequence.</p>
+
+                <figure>
+                    <video controls class="standard-img" style="max-width: 800px;">
+                        <source src="../pictures/vein_finder/live_demo.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Live demonstration showing real-time vein detection and site ranking.</figcaption>
+                </figure>
+
+                <p><strong>What you're seeing:</strong></p>
+                <ul>
+                    <li>Real-time segmentation and overlay of detected veins</li>
+                    <li>Top 3 ranked venipuncture sites highlighted with confidence indicators</li>
+                    <li>System operating at ~2 fps effective update rate</li>
+                    <li>Faint red glow from 740nm LEDs during capture sequence (740nm, 860nm, 940nm cycling)</li>
+                </ul>
+
+                <h2>Project Impact</h2>
+                <p>FirstStick addresses a clear unmet clinical need—affordable, intelligent venipuncture guidance for underserved clinics. By combining multi-wavelength NIR imaging with real-time machine learning, we've demonstrated feasibility of a system that not only visualizes veins but recommends optimal sites, working equitably across skin tones. The 83% agreement rate with expert clinicians in our blind study validates the core technology, while the <$300 production cost target makes the solution accessible to resource-constrained healthcare settings.</p>
+
                 <div class="project-links">
-                    <a href="#" class="button">View GitHub Repository</a>
+                    <a href="../files/Team5_Report3_Fall2025.pdf" class="button" target="_blank">View Full Technical Report</a>
                 </div>
             </div>
         </article>
