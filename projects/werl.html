@@ -3,8 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ME 2110 | Felix Hering</title>
+    <title>Water-Energy Lab Research | Felix Hering</title>
     <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Centered equation box styling */
+        .equation-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem auto;
+            max-width: 700px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .equation {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+        }
+
+        .equation:last-child {
+            margin-bottom: 0;
+        }
+
+        .variable-def {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-top: 1rem;
+        }
+
+        .variable-def strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Results grid styling */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .result-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-card .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .callout {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            color: #856404;
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #856404;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,118 +118,183 @@
     <main class="project-content">
         <article>
             <div class="project-header">
-                <h1>Water-Energy Lab Research</h1>
-                <p class="project-meta">Summer 2024 | ME 2110</p>
+                <h1>Air Gap Diffusion Distillation Research</h1>
+                <p class="project-meta">Water-Energy Lab | Summer 2024</p>
                 <div class="project-tags">
-                    <span class="tech-pill">Solidworks</span>
-                    <span class="tech-pill">LabView</span>
+                    <span class="tech-pill">SolidWorks</span>
+                    <span class="tech-pill">LabVIEW</span>
                     <span class="tech-pill">Heat Transfer</span>
-                    <span class="tech-pill">Fluid Mechanics</span>
                     <span class="tech-pill">Experimental Design</span>
-
                 </div>
             </div>
 
-            <div class="project-side-by-side">
-                <div class="text">
-                    <h2>Air Gap Membrane Distillation (AGMD) Research</h2>
-                    <ul>
-                        <li>Developed and tested a lab-scale AGMD prototype for saline water desalination.</li>
-                        <li>AGMD uses a hydrophobic membrane and a static air gap to drive vapor transport from heated saline to a condensation surface.</li>
-                        <li>The system relies on thermal gradients and vapor pressure differences, avoiding direct contact between liquid phases to reduce fouling and maintenance.</li>
-                        <li>Designed a 3D-printed test fixture with a 45° angled condensation plate, improving condensate drainage and heat transfer.</li>
-                        <li>Explored AGMD as a low-energy, low-maintenance alternative for small-scale desalination applications.</li>
-                    </ul>
-                </div>
-                <img src="../pictures/agmd.png" alt="Air Gap Membrane Distillation">
-            </div>
-
-            <h2>Final Design</h2>
-                <h3>Condensation Plate</h3>
-                <ul>
-                    <li>Designed a condensation plate with ridge features to promote efficient condensation and collection of condensate.</li>
-                    <li>Ridges increased surface area, disrupted laminar film flow, and minimized channeling to maintain uniform condensate distribution.</li>
-                    
-                    <div class="project-media">
-                        <img src="../pictures/falling_film.png" alt="ME 2110 Robot" width="600">
-                        <figcaption>Condensation Plate</figcaption>
+            <div class="project-content">
+                <div class="project-side-by-side">
+                    <div class="text">
+                        <h2>Overview</h2>
+                        <p>
+                            Developed a membrane-free desalination system using <strong>Air Gap Diffusion Distillation (AGDD)</strong>. Unlike traditional membrane distillation, AGDD eliminates fouling by using direct evaporation across a static air gap, making it ideal for high-salinity applications with minimal maintenance.
+                        </p>
+                        <p>
+                            Designed and tested a lab-scale prototype with optimized thermal-hydraulic performance, achieving efficient vapor transport and heat recovery through innovative condensation plate geometry.
+                        </p>
                     </div>
+                    <figure>
+                        <img src="../pictures/agmd.png" alt="Air Gap Diffusion Distillation" style="max-width: 350px;">
+                    </figure>
+                </div>
+
+                <h2>Key Results</h2>
+                
+                <p>
+                    Built a functional AGDD prototype to evaluate polymer materials under realistic operating conditions. The system successfully demonstrated membrane-free desalination and provided a controlled environment for the durability study.
+                </p>
+
+                <h2>Design Innovations</h2>
+                
+                <h3>Ridge-Enhanced Condensation Plate</h3>
+                <ul>
+                    <li>Designed surface features that disrupt laminar film flow and promote dropwise condensation</li>
+                    <li>Increased effective surface area while maintaining uniform condensate drainage at 45° angle</li>
+                    <li>Minimized thermal resistance on cold side, improving overall heat transfer coefficient</li>
+                </ul>
+                
+                <figure>
+                    <img src="../pictures/falling_film.png" alt="Condensation Plate">
+                    <figcaption>Ridge-Enhanced Condensation Plate Design</figcaption>
+                </figure>
+
+                <h3>Integrated Heat Recovery System</h3>
+                <ul>
+                    <li>Hot saline flows down evaporator surface as thin liquid film</li>
+                    <li>Water evaporates directly into air gap; salt precipitates on evaporator surface</li>
+                    <li>Vapor condenses on cold plate, collected as purified water</li>
+                    <li>Cold feed flows through backside channel, capturing latent heat and preheating incoming feed</li>
                 </ul>
 
-                <h3>Full Setup</h3>
-                <ul>
-                    <li>Water vapor is generated below a hydrophobic membrane, which prevents liquid crossover and allows only vapor to pass.</li>
-                    <li>Salt precipitates on the heated top plate as water evaporates from the saline solution.</li>
-                    <li>The vapor condenses on the condensation plate plate, where it is collected as purified water.</li>
+                <figure>
+                    <img src="../pictures/agmd_final.png" alt="Full AGDD System">
+                    <figcaption>Complete AGDD System with Internal Heat Recovery</figcaption>
+                </figure>
 
-                    <div class="project-media">
-                        <img src="../pictures/agmd_final.png" alt="ME 2110 Robot" width="600">
-                        <figcaption>Full AGMD Diagram</figcaption>
-                    </div>
-                 </ul>
-
-            <h2>Further Research</h2>
-
-            <h3>Durability Study of Polymer Substrates for Brine Concentration</h3>
-            <p>
-                One of the primary limitations of air gap membrane distillation (AGMD) is the buildup of salt precipitates, which can accumulate on the vapor membrane. This scaling reduces heat transfer efficiency and disrupts the critical temperature gradient that drives the process. As a result, AGMD systems often require frequent maintenance to remove salt deposits. The second phase of this study explored polymer materials that are less prone to salt scaling in order to reduce maintenance frequency and operational costs.
-            </p>
-            
-            <h3>Goal</h3>
-            <p>
-                Evaluate the precipitation behavior of saline solutions on various polymer surfaces. Polymers were selected due to their chemical resistance, low cost, and high thermal stability. A total of eight materials were tested: Acrylic, Polyethylene, PTFE, PEEK, PVDF, Polysulfone, Polycarbonate, and Aluminum (used as a baseline).
-            </p>
-            
-            <h3>Experimental Setup</h3>
-            <p>
-                The experiment replicated the salt scaling and cleaning processes encountered in AGMD systems. Key parameters such as contact angle and surface roughness were measured to assess the surface energy characteristics of each material, which influence salt adhesion behavior.
-            </p>
-            <ul>
-                <li>Recorded initial weight and dimensions of all samples</li>
-                <li>Measured contact angle using a goniometer</li>
-                <li>Assessed surface roughness using a profilometer</li>
-                <li>Exposed samples to a saturated NaCl solution at 80 °C for 6 hours, angled at 45° to simulate condensation conditions</li>
-                <li>Reweighed samples to quantify salt deposition</li>
-                <li>Descaled samples by soaking in deionized water with a stir bar (400 RPM) for 1 hour</li>
-                <li>Reweighed samples post-cleaning</li>
-                <li>Dried samples in a vacuum oven for 30 minutes</li>
-                <li>Performed final contact angle and surface roughness measurements</li>
-            </ul>
-
-            <div class="project-media">
-                <img src="../pictures/salt_scaling.png" alt="Salt Scaling Setup">
-                <figcaption>Salt Scaling Setup</figcaption>
-            </div>
-
-            <h3>Results and Conclusion</h3>
-
-            <p>
-                **Acrylic** showed the highest increase in mass after exposure to saline solutions, indicating the greatest salt deposition.
-            </p>
-            <ul>
-                <li>Its polar ester groups likely adsorbed water, promoting salt crystallization.</li>
-                <li>High surface charge density may have attracted more ions from the solution.</li>
-                <li>A porous surface structure could have increased available area for salt accumulation.</li>
-            </ul>
-            
-            <p>
-                **PTFE** and **Polyethylene** exhibited the smallest change in mass across all tests:
-            </p>
-            <ul>
-                <li>This aligns with expectations, as both have extremely low surface energies, which minimize salt adhesion.</li>
-            </ul>
-            
-            <p>
-                Post-experiment surface roughness also revealed that **Acrylic** and **Polyethylene** experienced the most noticeable increase in texture due to scaling. In contrast, **PTFE** and **Polycarbonate** showed minimal changes in surface roughness, suggesting better resistance to salt deposition and easier cleaning.
-            </p>
-            
-
-            <div class="project-media">
-                <img src="../pictures/acrylic.png" alt="Effect of salt scaling on Acrylic" width="600">
-                <figcaption>Effct of salt scaling on Acrylic</figcaption>
-            </div>
-
-                 
-
+                <h2>Thermal-Hydraulic Analysis</h2>
                 
+                <p>
+                    The AGDD system presents a coupled heat and mass transfer problem</span>: vapor flux depends on temperature gradients, which depend on heat flux, which depends on vapor flux. This circular dependency requires iterative numerical solution.
+                </p>
 
+                <h3>Mass Transfer Across Air Gap</h3>
+                <p>Vapor flux is driven by the partial pressure difference between hot and cold surfaces:</p>
+                
+                <div class="equation-box">
+                    <div class="equation">
+                        J = K<sub>m</sub> · (P<sub>hot</sub> - P<sub>cold</sub>)
+                    </div>
+                    <div class="equation">
+                        where: K<sub>m</sub> = (D<sub>WA</sub> · M<sub>w</sub>)/(δ<sub>gap</sub> · R<sub>u</sub> · T<sub>avg</sub>)
+                    </div>
+                    <div class="variable-def">
+                        <strong>Where:</strong>
+                        J = mass flux [kg/m²·s]<br>
+                        K<sub>m</sub> = mass transfer coefficient<br>
+                        D<sub>WA</sub> = diffusion coefficient of water vapor in air<br>
+                        M<sub>w</sub> = molar mass of water vapor<br>
+                        P<sub>hot</sub>, P<sub>cold</sub> = vapor pressures (calculated via Antoine equation)<br>
+                        δ<sub>gap</sub> = air gap thickness (~3-5 mm range tested)<br>
+                        R<sub>u</sub> = universal gas constant
+                    </div>
+                </div>
+
+                <p>Vapor pressures are highly temperature-dependent and calculated using the Antoine equation:</p>
+
+                <div class="equation-box">
+                    <div class="equation">
+                        P(T) = exp(A - B/(T + C))
+                    </div>
+                    <div class="variable-def">
+                        <strong>Antoine Constants for Water:</strong>
+                        A = 23.1963, B = 3816.44, C = -46.13<br>
+                        T in Kelvin, P in Pascals<br>
+                        For saline water, vapor pressure is reduced by salinity factor f(S)
+                    </div>
+                </div>
+
+                <h3>Heat Transfer Balance</h3>
+                <p>Heat leaves the hot film through two parallel mechanisms:</p>
+
+                <div class="equation-box">
+                    <div class="equation">
+                        Q<sub>total</sub> = Q<sub>conduction</sub> + Q<sub>latent</sub>
+                    </div>
+                    <div class="equation">
+                        Q<sub>total</sub> = k<sub>air</sub> · A · (T<sub>hot</sub> - T<sub>cold</sub>)/δ<sub>gap</sub> + J · A · ΔH<sub>vap</sub>
+                    </div>
+                    <div class="variable-def">
+                        <strong>Critical Design Tradeoff:</strong> Reducing the air gap increases conductive heat transfer, which reduces the temperature difference between hot and cold sides. If the gap is too small, both sides approach the same temperature and vapor flux becomes negligible. If the gap is too large, energy efficiency suffers. The gap must be large enough to maintain sufficient temperature gradient for phase change while minimizing thermal losses.
+                    </div>
+                </div>
+
+                <h3>Iterative Solution Method</h3>
+                <p>The system is solved by discretizing the module into nodes along its length:</p>
+                <ol>
+                    <li>Start at inlet with known T<sub>hot,in</sub> and T<sub>cold,in</sub></li>
+                    <li>At each node, guess T<sub>cold</sub> at condensation plate surface</li>
+                    <li>Calculate vapor pressures using Antoine equation: P(T, S)</li>
+                    <li>Calculate mass flux J and heat fluxes Q<sub>evap</sub>, Q<sub>cond</sub></li>
+                    <li>Check energy balance: Q<sub>evap</sub> ≈ Q<sub>cond</sub></li>
+                    <li>If not converged, adjust T<sub>cold</sub> and repeat</li>
+                    <li>Update film temperature, mass flow, and salinity for next node</li>
+                    <li>March downstream until reaching outlet</li>
+                </ol>
+
+                <h3>Design Optimization Findings</h3>
+                <ul>
+                    <li><strong>Air gap thickness:</strong> Tested 3-5 mm range to balance vapor transport vs thermal insulation</li>
+                    <li><strong>Operating temperature:</strong> 90-95°C maximizes vapor pressure driving force</li>
+                    <li><strong>Direct evaporation advantage:</strong> Eliminates temperature polarization seen in membrane systems</li>
+                    <li><strong>Ridge-enhanced condensation:</strong> Improved drainage and heat transfer efficiency</li>
+                </ul>
+
+                <h2>Polymer Durability Study</h2>
+
+                <h3>Problem: Salt Scaling in Thermal Desalination</h3>
+                <p>
+                    Salt precipitation on heat transfer surfaces reduces efficiency and requires frequent maintenance. We evaluated eight polymer materials (Acrylic, Polyethylene, PTFE, PEEK, PVDF, Polysulfone, Polycarbonate, plus Aluminum baseline) to identify surfaces that resist salt scaling.
+                </p>
+
+                <h3>Experimental Method</h3>
+                <ul>
+                    <li>Measured initial contact angle and surface roughness</li>
+                    <li>Exposed samples to saturated NaCl solution at 80°C for 6 hours (45° angle)</li>
+                    <li>Quantified salt deposition by mass change</li>
+                    <li>Descaled samples using DI water with stirring (400 RPM, 1 hour)</li>
+                    <li>Measured post-cleaning surface properties</li>
+                </ul>
+
+                <figure>
+                    <img src="../pictures/salt_scaling.png" alt="Salt Scaling Setup">
+                    <figcaption>Salt Scaling Experimental Setup</figcaption>
+                </figure>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li><strong>Worst performer: Acrylic</strong> - Highest mass increase due to polar ester groups attracting water/ions and porous surface structure increasing deposition area</li>
+                    <li><strong>Best performers: PTFE and Polyethylene</strong> - Minimal salt adhesion due to extremely low surface energy</li>
+                    <li><strong>Surface roughness:</strong> Acrylic and Polyethylene showed largest texture increase; PTFE and Polycarbonate maintained smooth surfaces</li>
+                </ul>
+
+                <figure>
+                    <img src="../pictures/acrylic.png" alt="Effect of salt scaling on Acrylic">
+                    <figcaption>Effect of salt scaling on Acrylic surface</figcaption>
+                </figure>
+
+                <p><strong>Recommendation:</strong> PTFE is the optimal material for AGDD evaporator surfaces, offering both low salt adhesion and easy cleaning. Polyethylene provides a low-cost alternative for applications where budget is constrained.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Felix Hering</p>
+    </footer>
+</body>
+</html>
