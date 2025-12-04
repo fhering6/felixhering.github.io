@@ -45,11 +45,11 @@ main {
 }
 
 section {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 h2 {
-    margin-bottom: 1.5rem; /* Added a bit more space */
+    margin-bottom: 1rem; /* Added a bit more space */
     color: #2c3e50;
 }
 
@@ -293,6 +293,17 @@ footer {
     margin-bottom: 0.5rem;
 }
 
+.project-media video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0.5rem;
+    display: block;        /* the important part */
+    margin-left: auto;     /* centers it */
+    margin-right: auto;    /* centers it */
+}
+
 .project-media p {
     font-size: 0.95rem;
     color: #555;
@@ -301,7 +312,7 @@ footer {
 }
 
 .project-header {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid #e5e7eb;
 }
@@ -357,34 +368,73 @@ footer {
     margin-bottom: 0.5rem;
 }
 
+.project-content ul ul {
+    background: none;
+    padding-left: 2rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0.5rem 0;
+    border-radius: 0;
+}
+
+.side-by-side-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+.side-by-side-container figure {
+    flex: 1 1 400px;
+    max-width: 600px;
+    margin: 0;
+}
+
+.side-by-side-container img {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.side-by-side-container figcaption {
+    font-size: 0.9rem;
+    color: #475569;
+    margin-top: 0.4rem;
+    text-align: center;
+}
+
 .project-side-by-side {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
     gap: 2rem;
+    align-items: flex-start;
     margin: 2rem 0;
     flex-wrap: wrap;
 }
 
+.project-side-by-side .text {
+    flex: 1 1 400px;
+    min-width: 300px;
+}
+
+.project-side-by-side figure {
+    flex: 0 0 400px;
+    margin: 0;
+}
+
 .project-side-by-side img {
-    max-width: 45%;
+    width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.project-side-by-side .text {
-    flex: 1;
-    min-width: 200px;
-}
-.project-side-by-side .text > *:first-child {
-    margin-top: 0;
-}
-
-.project-side-by-side .text p {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #333;
+.project-side-by-side figcaption {
+    font-size: 0.9rem;
+    color: #475569;
+    margin-top: 0.4rem;
+    text-align: center;
 }
 
 /* --- Project Page Image Styling --- */
@@ -392,8 +442,9 @@ footer {
     margin: 1.5rem 0; 
 }
 
-.project-content figure img {
-    max-width: 650px; 
+.project-content figure img,
+.project-content figure video {
+    max-width: 650px;
     width: 100%; 
     display: block;
     margin-left: auto;
@@ -417,7 +468,7 @@ pre {
     overflow-x: auto;          
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 code {
@@ -458,4 +509,154 @@ code {
     .interests-grid {
         grid-template-columns: 1fr;
     }
+}
+
+
+/* =========================================
+   VEIN FINDER PAGE SPECIFIC STYLES
+   ========================================= */
+
+/* Reduce gap after h2 headings */
+.project-content h2 {
+    margin-bottom: 1rem; /* Reduced from 1.5rem */
+}
+
+/* Key Stats Section - Eye-catching design */
+.key-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin: 2rem auto;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4);
+    max-width: 1000px;
+}
+
+.stat {
+    text-align: center;
+    flex: 1 1 200px;
+    padding: 1rem;
+}
+
+.stat h3 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.stat p {
+    font-size: 0.95rem;
+    color: #f0f0f0;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Section dividers for better visual organization */
+.project-content > h2 {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 3px solid #e5e7eb;
+    position: relative;
+}
+
+.project-content > h2:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 1rem;
+}
+
+.project-content > h2::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #3b82f6;
+}
+
+.project-content > h2:first-of-type::before {
+    display: none;
+}
+
+/* Highlight boxes for important sections */
+.highlight-box {
+    background: #f0f9ff;
+    border-left: 4px solid #3b82f6;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+}
+
+.highlight-box h3 {
+    color: #1e40af;
+    margin-top: 0;
+}
+
+/* Project links styling */
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project-links .button {
+    background: #3b82f6;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.project-links .button:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Better list styling */
+.project-content ul {
+    background: #f8fafc;
+    padding: 1.5rem 1.5rem 1.5rem 3rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.project-content ul li {
+    margin-bottom: 0.75rem;
+}
+
+.project-content ul li strong {
+    color: #1e40af;
+}
+
+/* Ordered list styling for processes */
+.project-content ol {
+    background: #f8fafc;
+    padding: 1.5rem 1.5rem 1.5rem 3rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    counter-reset: item;
+}
+
+.project-content ol li {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.project-content ol li::marker {
+    color: #3b82f6;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
