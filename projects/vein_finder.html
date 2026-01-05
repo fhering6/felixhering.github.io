@@ -100,7 +100,7 @@
                     <li><strong>Direct GPIO Control:</strong> Eliminated the problematic I2C controller; Jetson Nano GPIO pins now directly drive logic-level MOSFETs (one per wavelength channel)</li>
                     <li><strong>Discrete Current Limiting:</strong> Series resistors calculate LED current from the 12V supply, avoiding complex driver ICs during prototyping</li>
                     <li><strong>Improved Debuggability:</strong> Each LED channel can be tested independently with basic multimeter measurements</li>
-                    <li><strong>Three-Wavelength Architecture:</strong> 6× 720nm LEDs, 3× 860nm LEDs, 3× 940nm LEDs arranged in a ring around the camera aperture</li>
+                    <li><strong>Three-Wavelength Architecture:</strong> 6× 740nm LEDs, 3× 860nm LEDs, 3× 940nm LEDs arranged in a ring around the camera aperture</li>
                 </ul>
 
                 <figure>
@@ -223,7 +223,7 @@
                     <li>Inference + display latency: typically <0.4s per frame update</li>
                 </ul>
                 <h2>Live Demo</h2>
-                <p>The video below demonstrates FirstStick operating in real-time on an actual subject. Watch as the device continuously analyzes the vein structure and provides live recommendations for the optimal venipuncture site. The faint red light flashing throughout the video is the 720nm NIR LED bank cycling during the multi-wavelength capture sequence.</p>
+                <p>The video below demonstrates FirstStick operating in real-time on an actual subject. Watch as the device continuously analyzes the vein structure and provides live recommendations for the optimal venipuncture site. The faint red light flashing throughout the video is the 740nm NIR LED bank cycling during the multi-wavelength capture sequence.</p>
 
                 <figure>
                     <video controls class="standard-img" style="max-width: 800px;">
@@ -255,4 +255,5 @@
     </footer>
 </body>
 </html>
+
 
